@@ -1,6 +1,6 @@
 import Form from "./Form";
 import Todo from "./Todo";
-import { useState } from "react";
+import { useReducer } from "react";
 
 function Todos() {
   const todosDefault = [
@@ -22,43 +22,60 @@ function Todos() {
     },
   ];
 
-  const [todos, setTodos] = useState(todosDefault);
-  const [text, setText] = useState("");
-  const favoriteValue = (id) => {
-    const data = todos.map((todo, i) => {
-      if (i === id) {
-        todo.favorite = !todo.favorite;
-        return todo;
-      }
-      return todo;
-    });
-    setTodos(data);
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "addTodo":
+        return {
+          text: "",
+          todos: action.payload,
+        };
+      case "setText":
+        return {
+          ...state,
+          text: action.payload,
+        };
+      default:
+        return state;
+    }
   };
 
-  const deleteTodo = (id) => {
-    const data = todos.filter((todo, i) => {
-      if (i !== id) {
-        return todo;
-      }
-      return null;
-    });
+  const [data, dispatch] = useReducer(reducer, {
+    todos: todosDefault,
+    text: "",
+  });
 
-    setTodos(data);
+  const handleAddTodo = (value) => {
+    dispatch({
+      type: "addTodo",
+      payload: value,
+    });
+  };
+
+  const hadleSetText = (value) => {
+    dispatch({
+      type: "setText",
+      payload: value,
+    });
   };
 
   return (
     <>
-      <Form text={text} setText={setText} setTodos={setTodos} todos={todos} />
+      <Form
+        text={data.text}
+        handleAddTodo={handleAddTodo}
+        hadleSetText={hadleSetText}
+        todos={data.todos}
+      />
       <div className="todos">
-        {todos.map((todo, i) => {
+        {data.todos.map((todo, i) => {
           const todoClass = `todo ${todo.favorite ? "selected" : ""}`;
           return (
             <Todo
               i={i}
               todoClass={todoClass}
               todo={todo}
-              favoriteValue={favoriteValue}
-              deleteTodo={deleteTodo}
+              todos={data.todos}
+              handleAddTodo={handleAddTodo}
             />
           );
         })}

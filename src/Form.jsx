@@ -1,4 +1,4 @@
-function Form({todos, text, setText, setTodos}) {
+function Form({ todos, text, handleAddTodo, hadleSetText }) {
   const addTodo = () => {
     for (let i = 0; i < todos.length; i++) {
       if (todos[i].text.toUpperCase() === text.toUpperCase()) {
@@ -7,8 +7,7 @@ function Form({todos, text, setText, setTodos}) {
         return;
       }
     }
-    setTodos([{ text: text, favorite: false }, ...todos]);
-    setText("");
+    handleAddTodo([{ text: text, favorite: false }, ...todos]);
   };
   return (
     <div className="form">
@@ -16,7 +15,7 @@ function Form({todos, text, setText, setTodos}) {
         type="text"
         placeholder="Inter to do text..."
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => hadleSetText(e.target.value)}
       />
       <button onClick={addTodo}>Add</button>
     </div>
