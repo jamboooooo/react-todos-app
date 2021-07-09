@@ -1,0 +1,70 @@
+.main {
+  margin: auto;
+  width: 500px;
+}
+
+.header h1 {
+  text-align: center;
+  margin: 0;
+}
+
+.header {
+  border-bottom: 1px solid rgb(204, 200, 197);
+  margin-bottom: 15px;
+}
+
+.form {
+  display: flex;
+}
+
+.form input {
+  flex: 1;
+  border: 1px solid rgb(204, 200, 197);
+  border-radius: 4px;
+  padding: 0 15px;
+}
+
+.form button {
+  background-color: indigo;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  margin-left: 15px;
+  border-radius: 4px;
+}
+
+.todos .todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid rgb(204, 200, 197);
+}
+
+.favorite {
+  padding: 0 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.delete-todo button {
+  color: red;
+  padding: 5px 15px;
+  background-color: transparent;
+  border: none;
+  font-weight: bolder;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #fff706c0;
+}
+
+.selected .favorite {
+  color: #ffc013;
+}
+
+.todo-text {
+  flex: 1;
+}
