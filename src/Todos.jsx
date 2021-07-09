@@ -1,4 +1,5 @@
 import Form from "./Form";
+import Todo from "./Todo";
 import { useState } from "react";
 
 function Todos() {
@@ -51,17 +52,14 @@ function Todos() {
       <div className="todos">
         {todos.map((todo, i) => {
           const todoClass = `todo ${todo.favorite ? "selected" : ""}`;
-
           return (
-            <div key={i} className={todoClass}>
-              <div className="favorite" onClick={() => favoriteValue(i)}>
-                ★
-              </div>
-              <div className="todo-text">{todo.text}</div>
-              <div className="delete-todo">
-                <button onClick={() => deleteTodo(i)}>X</button>
-              </div>
-            </div>
+            <Todo
+              i={i}
+              todoClass={todoClass}
+              todo={todo}
+              favoriteValue={favoriteValue}
+              deleteTodo={deleteTodo}
+            />
           );
         })}
       </div>

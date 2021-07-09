@@ -1,22 +1,22 @@
-function Form(props) {
+function Form({todos, text, setText, setTodos}) {
   const addTodo = () => {
-    for (let i = 0; i < props.todos.length; i++) {
-      if (props.todos[i].text === props.text) {
+    for (let i = 0; i < todos.length; i++) {
+      if (todos[i].text.toUpperCase() === text.toUpperCase()) {
         alert("Такая задача уже существует");
         console.log(21);
         return;
       }
     }
-    props.setTodos([{ text: props.text, favorite: false }, ...props.todos]);
-    props.setText("");
+    setTodos([{ text: text, favorite: false }, ...todos]);
+    setText("");
   };
   return (
     <div className="form">
       <input
         type="text"
         placeholder="Inter to do text..."
-        value={props.text}
-        onChange={(e) => props.setText(e.target.value)}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
       <button onClick={addTodo}>Add</button>
     </div>
